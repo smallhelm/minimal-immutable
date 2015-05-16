@@ -1,0 +1,32 @@
+{
+  "name": "minimal-immutable",
+  "version": "0.0.0",
+  "description": "Minimal api for immutable datastructures (maps) in javascript",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smallhelm/minimal-immutable.git"
+  },
+  "keywords": [
+    "immutable"
+  ],
+  "author": "smallhelm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smallhelm/minimal-immutable/issues"
+  },
+  "dependencies": {
+    "clone": "1.0.2",
+    "deep-equal": "1.0.0",
+    "object-keys": "1.0.3",
+    "x-is-array": "0.1.0",
+    "x-is-object": "0.1.0"
+  },
+  "scripts": {
+    "test": "node tests.js | tap-dot"
+  },
+  "devDependencies": {
+    "tap-dot": "1.0.0",
+    "tape": "4.0.0"
+  }
+}
