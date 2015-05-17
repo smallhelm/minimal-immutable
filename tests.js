@@ -93,18 +93,18 @@ test("toIterator", function(t){
   var i = MI.fromJS({a: 1, b: 2, c: 3, d: {e: {f: 4}}});
   var iter = MI.toIterator(i);
 
-  var assertKeyVal = function(keyval, key, val){
-    t.deepEqual(keyval[0], key);
-    t.equal(MI.equals(keyval[1], MI.fromJS(val)), true);
+  var assertKeyVal = function(iter, key, val){
+    t.deepEqual(iter.key, key);
+    t.equal(MI.equals(iter.value, MI.fromJS(val)), true);
   };
 
-  assertKeyVal(iter.first, 'a', 1);
+  assertKeyVal(iter, 'a', 1);
   iter = iter.next();
-  assertKeyVal(iter.first, 'b', 2);
+  assertKeyVal(iter, 'b', 2);
   iter = iter.next();
-  assertKeyVal(iter.first, 'c', 3);
+  assertKeyVal(iter, 'c', 3);
   iter = iter.next();
-  assertKeyVal(iter.first, 'd', {e: {f: 4}});
+  assertKeyVal(iter, 'd', {e: {f: 4}});
   iter = iter.next();
   t.equal(iter, undefined);
 

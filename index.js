@@ -8,7 +8,8 @@ var mkIteratorByKeys = function(i, keys){
     return undefined;
   }
   return {
-    first: [keys[0], i[keys[0]]],
+    key: keys[0],
+    value: i[keys[0]],
     next: function(){
       keys.shift();
       return mkIteratorByKeys(i, keys);
