@@ -12,13 +12,13 @@ var MI = require('minimal-immutable');
 
 ## var js = MI.toJS(i)
 
-## MI.assoc(i, key_or_path, value)
+## MI.assoc(i, key, value)
 
-## MI.dissoc(i, key_or_path)
+## MI.dissoc(i, key)
 
-## MI.get(i, key_or_path)
+## MI.get(i, key)
 
-## MI.equals(i0, i1, i2 ...)
+## MI.equals(i0, i1)
 
 ## MI.toIterator(i)
 

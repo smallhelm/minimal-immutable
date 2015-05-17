@@ -1,39 +1,7 @@
 var getKeys = Object.keys || require('object-keys');
 var clone = require('clone');
-var isArray = require('x-is-array');
 var isObject = require('x-is-object');
 var deepEqual = require('deep-equal');
-
-var toPath = function(key_or_path){
-  if(!isArray(key_or_path)){
-    key_or_path = [key_or_path];
-  }
-  return key_or_path;
-};
-
-var navTo = function(i, path, createIfNotFound){
-  var j, key, curr, prev_key;
-  for(j=0; j<path.length; j++){
-    key = path[j];
-    if(j === 0){
-      curr = i;
-    }else{
-      curr = curr[prev_key];
-    }
-    if(!isObject(curr)){
-      return undefined;
-    }
-    if(!curr.hasOwnProperty(key)){
-      if(createIfNotFound){
-        curr[key] = {};
-      }else{
-        return undefined;
-      }
-    }
-    prev_key = key;
-  }
-  return [curr, key];
-};
 
 var mkIteratorByKeys = function(i, keys){
   if(keys.length === 0){
@@ -55,42 +23,36 @@ module.exports = {
   toJS: function(i){
     return clone(i);
   },
-  assoc: function(i, key_or_path, value){
+  assoc: function(i, key, value){
     var i2 = clone(i);
-    var path = toPath(key_or_path);
 
-    var nav = navTo(i2, path, true);
-    if(!nav){
-      return undefined;//must have a bad path
+    if(!isObject(i2)){
+      return undefined;
     }
-    nav[0][nav[1]] = value;
+    i2[key] = value;
+
     return i2;
   },
-  dissoc: function(i, key_or_path){
+  dissoc: function(i, key){
     var i2 = clone(i);
-    var path = toPath(key_or_path);
 
-    var nav = navTo(i2, path, false);
-    if(!nav){
-      return i2;//bad path, so we don't care b/c whatever it was, it's gone now
+    if(!isObject(i2)){
+      return undefined;
     }
-    delete nav[0][nav[1]];
+    if(i2.hasOwnProperty(key)){
+      delete i2[key];
+    }
+
     return i2;
   },
-  get: function(i, key_or_path){
-    var path = toPath(key_or_path);
-    var nav = navTo(i, path, false);
-    return nav ? nav[0][nav[1]] : undefined;
-  },
-  equals: function(i0 /* i1, i2 ... */){
-    var i_of_n, n;
-    for(n=1; n<arguments.length; n++){
-      i_of_n = arguments[n];
-      if(!deepEqual(i0, i_of_n, {strict: true})){
-        return false;
-      }
+  get: function(i, key){
+    if(!isObject(i)){
+      return undefined;
     }
-    return true;
+    return i[key];
+  },
+  equals: function(i0, i1){
+    return !!deepEqual(i0, i1, {strict: true});
   },
   toIterator: function(i){
     return mkIteratorByKeys(i, getKeys(i));

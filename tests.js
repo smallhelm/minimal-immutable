@@ -31,37 +31,35 @@ test("toJS", function(t){
 test("assoc", function(t){
   var i0 = MI.fromJS({a: 1, b: 2});
   var i1 = MI.assoc(i0, 'c', 3);
-  var i2 = MI.assoc(i1, ['c', 'd', 'e'], 4);
-  var i3 = MI.assoc(i1, ['d', 'e', 'f'], 4);
-  var i4 = MI.assoc(i3, ['c'], 5);
+  var i2 = MI.assoc(i1, 'c', 4);
+  var i3 = MI.assoc(i2, 'd', MI.fromJS({e: {f: 5}}));
 
   t.deepEqual(MI.toJS(i0), {a: 1, b: 2});
   t.deepEqual(MI.toJS(i1), {a: 1, b: 2, c: 3});
-  t.deepEqual(MI.toJS(i2), undefined);
-  t.deepEqual(MI.toJS(i3), {a: 1, b: 2, c: 3, d: {e: {f: 4}}});
-  t.deepEqual(MI.toJS(i4), {a: 1, b: 2, c: 5, d: {e: {f: 4}}});
+  t.deepEqual(MI.toJS(i2), {a: 1, b: 2, c: 4});
+  t.deepEqual(MI.toJS(i3), {a: 1, b: 2, c: 4, d: {e: {f: 5}}});
+  t.equal(MI.assoc('a', 4), undefined);
   t.end();
 });
 
 test("dissoc", function(t){
   var i0 = MI.fromJS({a: 1, b: 2, c: 3, d: {e: {f: 4}}});
   var i1 = MI.dissoc(i0, 'c');
-  var i2 = MI.dissoc(i0, ['c', 'd', 'e']);
-  var i3 = MI.dissoc(i0, ['d', 'e', 'f']);
-  var i4 = MI.dissoc(i0, ['d']);
+  var i2 = MI.dissoc(i0, 'd');
+  var i3 = MI.dissoc(i0, 'z');
 
   t.deepEqual(MI.toJS(i0), {a: 1, b: 2, c: 3, d: {e: {f: 4}}});
   t.deepEqual(MI.toJS(i1), {a: 1, b: 2,       d: {e: {f: 4}}});
-  t.deepEqual(MI.toJS(i2), {a: 1, b: 2, c: 3, d: {e: {f: 4}}});
-  t.deepEqual(MI.toJS(i3), {a: 1, b: 2, c: 3, d: {e: {    }}});
-  t.deepEqual(MI.toJS(i4), {a: 1, b: 2, c: 3                });
+  t.deepEqual(MI.toJS(i2), {a: 1, b: 2, c: 3                });
+  t.deepEqual(MI.toJS(i3), {a: 1, b: 2, c: 3, d: {e: {f: 4}}});
+  t.equal(MI.dissoc(4, 'a'), undefined);
   t.end();
 });
 
 test("get", function(t){
   var i = MI.fromJS({a: 1, b: 2, c: 3, d: {e: {f: 4}}});
   var g1 = MI.get(i, 'a');
-  var g2 = MI.get(i, ['d', 'e']);
+  var g2 = MI.get(MI.get(i, 'd'), 'e');
 
   t.deepEqual(MI.toJS(i), {a: 1, b: 2, c: 3, d: {e: {f: 4}}});
   t.deepEqual(MI.toJS(g1), 1);
@@ -81,10 +79,12 @@ test("equals", function(t){
 
   t.ok(o0 !== o1, 'two different identites');
   t.equal(MI.equals(i0, i1), true);
-  t.equal(MI.equals(i0, i1, MI.fromJS(o0)), true);
+  t.equal(MI.equals(i0, MI.fromJS(o0)), true);
+  t.equal(MI.equals(i1, MI.fromJS(o0)), true);
   t.equal(MI.equals(i2, MI.fromJS(o1)), true);
   t.equal(MI.equals(i0, i2), false);
-  t.equal(MI.equals(i0, i1, MI.fromJS(o0), MI.fromJS(o1)), false);
+  t.equal(MI.equals(i1, i2), false);
+  t.equal(MI.equals(MI.fromJS(o0), MI.fromJS(o1)), false);
 
   t.end();
 });

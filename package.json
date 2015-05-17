@@ -19,7 +19,6 @@
     "clone": "1.0.2",
     "deep-equal": "1.0.0",
     "object-keys": "1.0.3",
-    "x-is-array": "0.1.0",
     "x-is-object": "0.1.0"
   },
   "scripts": {
