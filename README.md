@@ -10,17 +10,37 @@ var MI = require('minimal-immutable');
 
 ## var i = MI.fromJS(js)
 
+Create an immutable value from a mutable js object.
+
 ## var js = MI.toJS(i)
 
-## MI.assoc(i, key, value)
+Create a mutable js object from an immutable value.
 
-## MI.dissoc(i, key)
+## var i1 = MI.assoc(i0, key, value)
 
-## MI.get(i, key)
+Returns a new version of i0 with key associated to value.
 
-## MI.equals(i0, i1)
+## var i1 = MI.dissoc(i0, key)
 
-## MI.toIterator(i)
+Returns a new version of i0 with key dissociated.
+
+## var value = MI.get(i, key)
+
+Get the value associated with key.
+
+## var tf = MI.equals(i0, i1)
+
+Value not identity, equality.
+
+## var iter = MI.toIterator(i)
+
+Create an iterator for i. 
+
+***iter.key*** the current key
+
+***iter.value*** the current value
+
+***iter.next()*** get the next iter, or undefined if it's the last one
 
 
 # License
