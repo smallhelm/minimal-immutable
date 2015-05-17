@@ -5,34 +5,34 @@ Minimal api for immutable datastructures (maps) in javascript.
 # Functions
 
 ```js
-var MI = require('minimal-immutable');
+var m = require('minimal-immutable');
 ```
 
-## var i = MI.fromJS(js)
+## var i = m.fromJS(js)
 
 Create an immutable value from a mutable js object.
 
-## var js = MI.toJS(i)
+## var js = m.toJS(i)
 
 Create a mutable js object from an immutable value.
 
-## var i1 = MI.assoc(i0, key, value)
+## var i1 = m.assoc(i0, key, value)
 
 Returns a new version of i0 with key associated to value.
 
-## var i1 = MI.dissoc(i0, key)
+## var i1 = m.dissoc(i0, key)
 
 Returns a new version of i0 with key dissociated.
 
-## var value = MI.get(i, key)
+## var value = m.get(i, key)
 
 Get the value associated with key.
 
-## var tf = MI.equals(i0, i1)
+## var tf = m.equals(i0, i1)
 
 Value not identity, equality.
 
-## var iter = MI.toIterator(i)
+## var iter = m.toIterator(i)
 
 Create an iterator for i. 
 
