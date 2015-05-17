@@ -1,6 +1,6 @@
 {
   "name": "minimal-immutable",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Minimal api for immutable datastructures (maps) in javascript",
   "main": "index.js",
   "repository": {
