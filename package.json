@@ -1,7 +1,7 @@
 {
   "name": "minimal-immutable",
   "version": "0.2.0",
-  "description": "Minimal api for immutable (copy on write) datastructures (maps) in javascript.",
+  "description": "Minimal api for immutable (copy on write) datastructures in javascript.",
   "main": "index.js",
   "repository": {
     "type": "git",

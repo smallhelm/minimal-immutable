@@ -1,6 +1,6 @@
 # minimal-immutable
 
-Minimal api for immutable (copy on write) datastructures (maps) in javascript.
+Minimal api for immutable (copy on write) datastructures in javascript.
 
 # Functions
 
