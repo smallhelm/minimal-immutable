@@ -1,7 +1,7 @@
 {
   "name": "minimal-immutable",
   "version": "0.1.0",
-  "description": "Minimal api for immutable datastructures (maps) in javascript",
+  "description": "Minimal api for immutable (copy on write) datastructures (maps) in javascript.",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
     "clone": "1.0.2",
     "deep-equal": "1.0.0",
     "object-keys": "1.0.3",
+    "seamless-immutable": "2.3.2",
     "x-is-object": "0.1.0"
   },
   "scripts": {
